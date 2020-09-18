@@ -13,6 +13,7 @@ jobs:
           name: Build app
           command: |
             if [[ "$CIRCLE_BRANCH" =~ ^release\/.*$ ]]; then 
+              echo "testing"
               echo "$CIRCLE_BRANCH"
             fi
 workflows:
