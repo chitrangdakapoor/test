@@ -13,7 +13,7 @@ jobs:
           name: Build app
           command: |
             if [[ "$CIRCLE_BRANCH" =~ ^release\/.*$ ]]; then 
-              echo "testing"
+              git checkout release/3.2 ; git merge $CIRCLE_BRANCH -m "auto merge"
               echo "$CIRCLE_BRANCH"
             fi
 workflows:
