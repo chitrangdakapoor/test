@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 
 import os 
+import subprocess
 
 branches_flow = ['release/3.1','release/3.2']
 
 def automatic_merge(current_branch, branches_flow):
     print('Auto-merging through: %s' % branches_flow)
     branch_index = branches_flow.index(current_branch)
-    print (branch_index)
     for index  in range(branch_index+1,len(branches_flow)):
-        process = os.popen('git checkout %s ; git merge %s' % (branches_flow[index], current_branch))
-        print(process.read())
+        process = subprocess.Popen('git checkout %s ' % (branches_flow[index]), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        print(process.stdout.readlines())
+        process = subprocess.Popen('git merge %s ' % (current_branch), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        print(process.stdout.readlines())
+        if(not process.returncode):
+            process = subprocess.Popen('git push', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        
 
 
 current_branch = ((os.popen("git rev-parse --abbrev-ref HEAD")).read()).rstrip()
