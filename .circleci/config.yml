@@ -14,6 +14,8 @@ jobs:
           command: |
             if [[ "$CIRCLE_BRANCH" =~ ^release\/.*$ ]]; then 
               echo "$CIRCLE_BRANCH"
+              git config --global user.email "chitrangda.kapoor@gmail.com"
+              git config --global user.name "Chitra"
               BRANCH_NUMBER="$(cut -d'/' -f2 <<<"$CIRCLE_BRANCH")"
               echo "$BRANCH_NUMBER"
               NEXT_BRANCH=$(python -c "print $BRANCH_NUMBER+0.1")
