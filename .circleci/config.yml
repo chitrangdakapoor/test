@@ -21,6 +21,7 @@ jobs:
               NEXT_BRANCH=$(python -c "print $BRANCH_NUMBER+0.1")
               echo "$NEXT_BRANCH"
               git checkout release/$NEXT_BRANCH ; git merge $CIRCLE_BRANCH -m "auto merge"
+              git push
               #python .circleci/scripts/auto_merge.py
             fi
 workflows:
