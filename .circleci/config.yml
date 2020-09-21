@@ -13,11 +13,11 @@ jobs:
           name: Build app
           command: |
             if [[ "$CIRCLE_BRANCH" =~ ^release\/.*$ ]]; then 
-              # git checkout release/3.2 ; git merge $CIRCLE_BRANCH -m "auto merge"
-              # echo "$CIRCLE_BRANCH"
-              pwd
-              ls -alrt
-              python .circleci/scripts/auto_merge.py
+              echo "$CIRCLE_BRANCH"
+              BRANCH_NUMBER="$(cut -d'/' -f2 <<<"$CIRCLE_BRANCH")"
+              NEXT_BRANCH=$((BRANCH_NUMBER + 0.1))
+              git checkout release/$NEXT_BRANCH ; git merge $CIRCLE_BRANCH -m "auto merge"
+              #python .circleci/scripts/auto_merge.py
             fi
 workflows:
   version: 2
