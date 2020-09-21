@@ -15,7 +15,8 @@ jobs:
             if [[ "$CIRCLE_BRANCH" =~ ^release\/.*$ ]]; then 
               # git checkout release/3.2 ; git merge $CIRCLE_BRANCH -m "auto merge"
               # echo "$CIRCLE_BRANCH"
-              pwdls -lrt
+              pwd
+              ls -lrt
               python scripts/auto_merge.py
             fi
 workflows:
