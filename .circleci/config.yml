@@ -16,7 +16,7 @@ jobs:
               echo "$CIRCLE_BRANCH"
               BRANCH_NUMBER="$(cut -d'/' -f2 <<<"$CIRCLE_BRANCH")"
               echo "$BRANCH_NUMBER"
-              NEXT_BRANCH=$((BRANCH_NUMBER + 0.1))
+              NEXT_BRANCH="$( bc <<<"$BRANCH_NUMBER + 0.1" )"
               echo "$NEXT_BRANCH"
               git checkout release/$NEXT_BRANCH ; git merge $CIRCLE_BRANCH -m "auto merge"
               #python .circleci/scripts/auto_merge.py
